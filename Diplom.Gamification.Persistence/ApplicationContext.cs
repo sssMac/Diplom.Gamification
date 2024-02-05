@@ -11,8 +11,12 @@ namespace Diplom.Gamification.Persistence
 {
     public class ApplicationContext : IdentityDbContext<ApplicationUser>
     {
-        //public DbSet<Review> Reviews { get; set; }
-        
+        public DbSet<Course> Courses { get; set; }
+        public DbSet<Lesson> Lessons { get; set; }
+        public DbSet<Assignment> Assignments { get; set; }
+        public DbSet<Achievement> Achievements { get; set; }
+        public DbSet<Forum> Forums { get; set; }
+        public DbSet<Message> Messages { get; set; }
 
         public ApplicationContext(DbContextOptions<ApplicationContext> options)
             : base(options) { }

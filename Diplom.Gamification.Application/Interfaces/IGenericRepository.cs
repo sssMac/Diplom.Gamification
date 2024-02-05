@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Diplom.Gamification.Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -12,13 +13,13 @@ namespace Diplom.Gamification.Application.Interfaces
         Task<IEnumerable<TEntity>> Get(
             Expression<Func<TEntity, bool>> filter = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
-            string includeProperties = "",
+            Expression<Func<TEntity, object>>? includeProperties = null,
             int pageNumber = default,
             int pageSize = default);
 
         Task<TEntity> GetByID(
             Guid id,
-            string includeProperties = "");
+            Expression<Func<TEntity, object>>? includeProperties = null);
         Task<TEntity> Insert(TEntity entity);
         Task<bool> Exists(Guid id);
         Task InsertRange(List<TEntity> entity);

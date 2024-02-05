@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34018.315
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Diplom.Gamification.Web", "Diplom.Gamification.Web\Diplom.Gamification.Web.csproj", "{6E5997BE-CBE9-460F-A482-AAA1A1FCF1D0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Diplom.Gamification.Web", "Diplom.Gamification.Web\Diplom.Gamification.Web.csproj", "{6E5997BE-CBE9-460F-A482-AAA1A1FCF1D0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Diplom.Gamification.Persistence", "Diplom.Gamification.Persistence\Diplom.Gamification.Persistence.csproj", "{80B3BCB0-1A68-4C84-8E6D-5E9385A7BDD8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Diplom.Gamification.Persistence", "Diplom.Gamification.Persistence\Diplom.Gamification.Persistence.csproj", "{80B3BCB0-1A68-4C84-8E6D-5E9385A7BDD8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Diplom.Gamification.Infrastructure", "Diplom.Gamification.Infrastructure\Diplom.Gamification.Infrastructure.csproj", "{42F3A234-0C19-4619-8E25-7B5F8791C998}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Diplom.Gamification.Infrastructure", "Diplom.Gamification.Infrastructure\Diplom.Gamification.Infrastructure.csproj", "{42F3A234-0C19-4619-8E25-7B5F8791C998}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Diplom.Gamification.Domain", "Diplom.Gamification.Domain\Diplom.Gamification.Domain.csproj", "{98AE91DC-7263-472D-BD35-0BBEEB61FD0F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Diplom.Gamification.Domain", "Diplom.Gamification.Domain\Diplom.Gamification.Domain.csproj", "{98AE91DC-7263-472D-BD35-0BBEEB61FD0F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Diplom.Gamification.Application", "Diplom.Gamification.Application\Diplom.Gamification.Application.csproj", "{BF2B4AA7-B9B3-4407-B927-64B9C96583C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Diplom.Gamification.Application", "Diplom.Gamification.Application\Diplom.Gamification.Application.csproj", "{BF2B4AA7-B9B3-4407-B927-64B9C96583C3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

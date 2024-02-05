@@ -13,5 +13,9 @@
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="7.0.13" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Diplom.Gamification.Domain\Diplom.Gamification.Domain.csproj" />
+	</ItemGroup>
 	
 </Project>

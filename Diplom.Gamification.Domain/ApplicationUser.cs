@@ -9,6 +9,6 @@ namespace Diplom.Gamification.Domain
 {
     public class ApplicationUser : IdentityUser
     {
-        public 
+        public int Rating { get; set; }
     }
 }

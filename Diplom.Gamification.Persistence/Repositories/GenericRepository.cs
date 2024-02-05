@@ -1,4 +1,5 @@
 ﻿using Diplom.Gamification.Application.Interfaces;
+using Diplom.Gamification.Domain;
 using Diplom.Gamification.Domain.Common;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
@@ -19,7 +20,7 @@ namespace Diplom.Gamification.Persistence.Repositories
         public virtual async Task<IEnumerable<TEntity>> Get(
             Expression<Func<TEntity, bool>> filter = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
-            string includeProperties = "",
+            Expression<Func<TEntity, object>>? includeProperties = null,
             int pageNumber = default,
             int pageSize = default)
         {
@@ -29,11 +30,12 @@ namespace Diplom.Gamification.Persistence.Repositories
             {
                 query = query.Where(filter);
             }
-            foreach (var includeProperty in includeProperties.Split
-                (new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+
+            if (includeProperties != null)
             {
-                query = query.Include(includeProperty);
+                query = query.Include(includeProperties);
             }
+
             if (pageNumber != default && pageSize != default)
             {
                 return await query.OrderByDescending(x => x.CreatedAt)
@@ -55,14 +57,13 @@ namespace Diplom.Gamification.Persistence.Repositories
 
         public virtual async Task<TEntity> GetByID(
             Guid id,
-            string includeProperties = "")
+            Expression<Func<TEntity, object>>? includeProperties = null)
         {
             IQueryable<TEntity> query = dbSet;
 
-            foreach (var includeProperty in includeProperties.Split
-            (new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+            if(includeProperties != null)
             {
-                query = query.Include(includeProperty);
+                query = query.Include(includeProperties);
             }
 
             return await query.Where(e => e.Id == id).FirstOrDefaultAsync();
