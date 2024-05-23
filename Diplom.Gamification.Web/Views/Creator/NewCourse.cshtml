@@ -1,0 +1,59 @@
+﻿@using Diplom.Gamification.Application.Consts
+@model AddCourseViewModel
+
+<h2>Создание курса</h2>
+
+<form asp-controller="Creator" asp-action="NewCourse" method="post">
+
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Title)
+        <input asp-for="Title" class="form-control" />
+        @Html.ValidationMessageFor(model => model.Title)
+    </div>
+
+    <div class="form-group w-25">
+        @Html.LabelFor(model => model.ImgLink)
+        <input asp-for="ImgLink" class="form-control" />
+        @Html.ValidationMessageFor(model => model.ImgLink)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Level)
+        <div class="rating">
+            @Html.RadioButtonFor(model => model.Level, 3, new { name = "rating", id = "star3" })
+            <label for="star3"><i class="far fa-heart"></i></label>
+            @Html.RadioButtonFor(model => model.Level, 2, new { name = "rating", id = "star2" })
+            <label for="star2"><i class="far fa-heart"></i></label>
+            @Html.RadioButtonFor(model => model.Level, 1, new { name = "rating", id = "star1" })
+            <label for="star1"><i class="far fa-heart"></i></i></label>
+        </div>
+
+        @Html.ValidationMessageFor(model => model.Level)
+
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Description)
+        <textarea asp-for="Description" class="form-control" id="editor"></textarea>
+        @Html.ValidationMessageFor(model => model.Description)
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary" asp-route-buttonAction="0" >Продолжить</button>
+        <button type="submit" class="btn btn-primary" asp-route-buttonAction="1" >Сохранить</button>
+        <a class="btn btn-primary float-end" style="background-color:brown !important;" href="/">Отмена</a>
+    </div>
+
+</form>
+
+@section Scripts{
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#editor'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+}

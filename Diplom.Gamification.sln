@@ -13,6 +13,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Diplom.Gamification.Domain"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Diplom.Gamification.Application", "Diplom.Gamification.Application\Diplom.Gamification.Application.csproj", "{BF2B4AA7-B9B3-4407-B927-64B9C96583C3}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Diplom.Gamification.Shared", "Diplom.Gamification.Shared\Diplom.Gamification.Shared.csproj", "{2AC4FE3A-A008-414E-AE7D-95CFE446AF17}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Diplom.Gamification.CompilerApp", "Diplom.Gamification.CompilerApp\Diplom.Gamification.CompilerApp.csproj", "{AD755A1E-6276-4EF0-8034-9E7CE96703D1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{BF2B4AA7-B9B3-4407-B927-64B9C96583C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF2B4AA7-B9B3-4407-B927-64B9C96583C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BF2B4AA7-B9B3-4407-B927-64B9C96583C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2AC4FE3A-A008-414E-AE7D-95CFE446AF17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AC4FE3A-A008-414E-AE7D-95CFE446AF17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2AC4FE3A-A008-414E-AE7D-95CFE446AF17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2AC4FE3A-A008-414E-AE7D-95CFE446AF17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD755A1E-6276-4EF0-8034-9E7CE96703D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD755A1E-6276-4EF0-8034-9E7CE96703D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD755A1E-6276-4EF0-8034-9E7CE96703D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD755A1E-6276-4EF0-8034-9E7CE96703D1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

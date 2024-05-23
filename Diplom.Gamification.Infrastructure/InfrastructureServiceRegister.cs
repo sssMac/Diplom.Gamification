@@ -9,6 +9,7 @@ namespace Diplom.Gamification.Infrastructure
         public static IServiceCollection AddInfrastructureLayer(this IServiceCollection services)
         {
             services.AddScoped<IAuthService, IdentityService>();
+            services.AddScoped<IYandexService, YandexService>();
 
             return services;
         }

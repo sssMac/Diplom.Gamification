@@ -1,9 +1,5 @@
 ﻿using Diplom.Gamification.Domain.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Diplom.Gamification.Shared;
 
 namespace Diplom.Gamification.Domain
 {
@@ -13,5 +9,8 @@ namespace Diplom.Gamification.Domain
         public Guid LessonId { get; set; }
         public bool IsCompleted { get; set; }
         public DateTime CompletionDate { get; set; }
+
+        public ApplicationUser User { get; set; }
+        public Lesson Lesson { get; set; }
     }
 }

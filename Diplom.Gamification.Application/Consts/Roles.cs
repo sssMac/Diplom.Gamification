@@ -9,6 +9,8 @@ namespace Diplom.Gamification.Application.Consts
     public static class Roles
     {
         public const string Admin = "Admin";
+        public const string Moderator = "Moderator";
+        public const string Creator = "Creator";
         public const string Basic = "Basic";
     }
 }

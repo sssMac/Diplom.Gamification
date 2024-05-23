@@ -1,49 +1,101 @@
-﻿<!DOCTYPE html>
+﻿@using Diplom.Gamification.Application.Consts
+@using Diplom.Gamification.Shared
+@using Microsoft.AspNetCore.Identity
+
+@inject UserManager<ApplicationUser> userManager
+
+@{
+    var user = await userManager.FindByNameAsync(User.Identity.Name);
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Diplom.Gamification.Web</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <title>@ViewData["Title"] - Education</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/profile.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/ratingList.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Diplom.Gamification.Web.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/compilator.min.css" asp-append-version="true" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300&family=Rubik:wght@500&display=swap" rel="stylesheet">
+
+    <!-- CODEMIRROR -->
+    <link rel="stylesheet" href="https://codemirror.net/5/lib/codemirror.css">
+    <link rel="stylesheet" href="~/themes/shadowfox.css">
+
+    <!-- FONT AWESOME -->
+    <script src="https://kit.fontawesome.com/3ee70c58bc.js" crossorigin="anonymous"></script>
+
 </head>
+
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Diplom.Gamification.Web</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+    <header class="p-3 mb-3 border-bottom">
+        <div class="container">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
+                    <img src="/img/logo.svg" role="img" style="margin-right: 20px; width: 70px; height: 60px;" aria-label="Bootstrap">
+                </a>
+
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                    <li><a href="/" class="nav-link px-2 link-dark">Главная</a></li>
+                    <li><a href="/Rating" class="nav-link px-2 link-dark">Рейтинг</a></li>
+                    <li><a href="/AIAssistant" class="nav-link px-2 link-dark">AI Помощник</a></li>
+                    <li><a href="/Shorts" class="nav-link px-2 link-dark">😊 Отвлечься!</a></li>
+                </ul>
+
+                <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+                    <input type="search" class="form-control" placeholder="Поиск..." aria-label="Search">
+                </form>
+
+                <div class="dropdown text-end">
+                    <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="@(user.AvatarLink)" alt="mdo" width="32" height="32" class="rounded-circle">
+                    </a>
+                    <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1" style="">
+                        <li><a class="dropdown-item link-dark" asp-action="Index" asp-controller="User">Профиль</a></li>
+                        <li><a class="dropdown-item link-dark" href="#">Настройки</a></li>
+                        @if (User.IsInRole(Roles.Creator) || User.IsInRole(Roles.Admin))
+                        {
+                            <li><a class="dropdown-item" asp-action="Index" asp-controller="Creator">Панель редактирования</a></li>
+
+                        }
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            @using (Html.BeginForm("Logout", "Auth", FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="dropdown-item">Выйти</button>
+                            }
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+
                     </ul>
                 </div>
             </div>
-        </nav>
+        </div>
     </header>
+   
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
+        
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - Diplom.Gamification.Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.1.0/classic/ckeditor.js"></script>
+    <script src="https://codemirror.net/5/lib/codemirror.js"></script>
+    <script src="https://codemirror.net/5/mode/clike/clike.js"></script>
+    <script src="https://codemirror.net/5/addon/selection/active-line.js"></script>
+
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css">
     <script src="~/js/site.js" asp-append-version="true"></script>
+
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

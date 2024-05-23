@@ -1,0 +1,81 @@
+﻿@model AddLessonViewModel
+
+<h2>Создание урока</h2>
+
+<form asp-controller="Creator" asp-action="NewLesson" method="post">
+
+    @Html.AntiForgeryToken()
+
+    <div hidden>
+        <input asp-for="CourseId" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Title)
+        <input asp-for="Title" class="form-control" />
+        @Html.ValidationMessageFor(model => model.Title)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Content)
+        <textarea asp-for="Content" class="form-control" id="editor1"></textarea>
+        @Html.ValidationMessageFor(model => model.Content)
+    </div>
+
+    <h3>
+        Создание задачи
+    </h3>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Assignment.Title)
+        <input asp-for="Assignment.Title" class="form-control" />
+        @Html.ValidationMessageFor(model => model.Assignment.Title)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Assignment.AssigmentTest)
+        <br />
+        <div class="input-group mb-2 mr-sm-2">
+            <div class="input-group-prepend">
+                <div class="input-group-text" style="width: 75px;">Вход</div>
+            </div>
+            <input asp-for="Assignment.AssigmentTest.Input" class="form-control" />
+        </div>
+        @Html.ValidationMessageFor(model => model.Assignment.AssigmentTest.Input)
+        <div class="input-group mb-2 mr-sm-2">
+            <div class="input-group-prepend">
+                <div class="input-group-text" style="width: 75px;">Выход</div>
+            </div>
+            <input asp-for="Assignment.AssigmentTest.Output" class="form-control w-50" />
+        </div>
+        @Html.ValidationMessageFor(model => model.Assignment.AssigmentTest.Output)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Assignment.Description)
+        <textarea asp-for="Assignment.Description" class="form-control" id="editor2"></textarea>
+        @Html.ValidationMessageFor(model => model.Assignment.Description)
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+        <a class="btn btn-primary float-end" style="background-color:brown !important;" href="/">Отмена</a>
+    </div>
+
+</form>
+
+@section Scripts {
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#editor1'))
+            .catch(error => {
+                console.error(error);
+            });
+
+        ClassicEditor
+            .create(document.querySelector('#editor2'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+}

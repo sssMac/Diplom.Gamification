@@ -1,0 +1,59 @@
+﻿@model List<ShortsViewModel>
+
+<div class="shorts_container">
+    <button id="backbtn" class="btn-dark"><i class="fa-solid fa-angle-left"></i></button>
+    <div id="player"> </div>
+    <button id="nextbtn" class="btn-dark"><i class="fa-solid fa-angle-right"></i></button>
+
+</div>
+
+@section Scripts{
+    <script>
+        var counter = 0;
+        var videos = [
+            @foreach (var item in Model)
+            {
+                <text>'@item.VideoId',</text>
+            }
+        ]
+        
+        var tag = document.createElement('script');
+
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        var player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                height: '839',
+                width: '472',
+                videoId: videos[counter],
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+
+        function onPlayerReady(event) {
+            document.querySelector("#nextbtn").addEventListener("click", () => {
+                counter++;
+                player.loadVideoById(videos[counter]);
+            })
+            event.target.playVideo();
+        }
+
+        var done = false;
+        function onPlayerStateChange(event) {
+            if (event.data == YT.PlayerState.PLAYING && !done) {
+                setTimeout(stopVideo, 6000);
+                done = true;
+            }
+        }
+        function stopVideo() {
+            player.stopVideo();
+        }
+    </script>
+
+}

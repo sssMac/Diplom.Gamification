@@ -6,6 +6,6 @@ namespace Diplom.Gamification.Domain.Common
     {
         [Key]
         public Guid Id { get; set; }
-        public DateTime CreatedAt { get; set; }
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     }
 }

@@ -1,11 +1,8 @@
 ﻿using Diplom.Gamification.Domain;
+using Diplom.Gamification.Persistence.Configuration.Tables;
+using Diplom.Gamification.Shared;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Diplom.Gamification.Persistence
 {
@@ -17,13 +14,17 @@ namespace Diplom.Gamification.Persistence
         public DbSet<Achievement> Achievements { get; set; }
         public DbSet<Forum> Forums { get; set; }
         public DbSet<Message> Messages { get; set; }
+        public DbSet<LearningProgress> LearningProgress { get; set; }
 
         public ApplicationContext(DbContextOptions<ApplicationContext> options)
-            : base(options) { }
+            : base(options) 
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            TablesConfiguration.Configure(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationContext).Assembly);
         }
         

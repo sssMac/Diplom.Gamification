@@ -1,0 +1,56 @@
+﻿@model LessonViewModel
+
+@{
+    Layout = "../Shared/_Layout";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="media g-mb-30 media-comment" style="margin-bottom: 100px;">
+                <p class="comment-text">
+                    <div class="secondary">@Html.LabelFor(model => model.Title):</div>
+                    <div class="primary">@Model.Title</div>
+                </p>
+                <p class="comment-text">
+                    <div class="secondary">@Html.LabelFor(model => model.Content):</div>
+                    <div class="primary">@(Html.Raw(Model.Content))</div>
+                </p>
+            </div>
+
+            @if(Model.Assignment != null)
+            {
+                <div class="media g-mb-30 media-comment">
+                    <p class="comment-text">
+                        <h3>@Model.Assignment.Title</h3>
+                    </p>
+
+                    <p class="comment-text">
+                        <div class="secondary">@Html.LabelFor(model => model.Assignment.AssignmentTest):</div>
+                        <div class="primary input-group mb-2 mr-sm-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text" style="width: 75px;">Вход</div>
+                            </div>
+                            <input asp-for="Assignment.AssignmentTest.Input" class="form-control" readonly />
+                        </div>
+                        <div class="primary input-group mb-2 mr-sm-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text" style="width: 75px;">Выход</div>
+                            </div>
+                            <input asp-for="Assignment.AssignmentTest.Output" class="form-control" readonly />
+                        </div>
+                    </p>
+
+                    <p class="comment-text">
+                        <div class="secondary">@Html.LabelFor(model => model.Assignment.Description):</div>
+                        <div class="primary">@(Html.Raw(Model.Assignment.Description))</div>
+                    </p>
+
+                    <div class="form-group">
+                        <a href="@Url.Action("Index", "Assignment", new { assignmentId = @Model.Assignment.Id })" class="btn btn-primary">Перейте к задаче</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

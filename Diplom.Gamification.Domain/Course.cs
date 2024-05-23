@@ -8,6 +8,7 @@ namespace Diplom.Gamification.Domain
         public string Description { get; set; }
         public int Level { get; set; }
         public string CreatedBy { get; set; }
+        public string? ImgLink { get; set; }
 
         public List<Lesson> Lessons { get; set; }
     }

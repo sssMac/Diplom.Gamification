@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app
+  labels:
+    app: my-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+      - name: my-app-container
+        image: maczxc/diplomgamification-web:latest
+        ports:
+        - containerPort: 8080
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: "Production"
+        - name: ConnectionStrings__DefaultConnection
+          value: "Host=postgre;Port=5432;Database=DiplomDB;Username=postgres;Password=russiamedved"
+      - name: db-container
+        image: postgres:14.1-alpine
+        ports:
+        - containerPort: 5432
+        env:
+        - name: POSTGRESS_USER
+          value: "postgres"
+- name: POSTGRESS_PASSWORD
+          value: "russiamedved"
+        - name: POSTGRESS_DB
+          value: "DiplomDB"
+        - name: POSTGRES_HOST_AUTH_METHOD
+          value: "trust"
+      volumes:
+        - name: postgres-storage
+        emptyDir: {}
+---
+
+apiVersion: v1
+Kind: Service
+metadata:  
+name: myapp-service
+spec:  selector:
+    app: my-app
+    ports:
+  - name: http
+    port: 8080
+    targetPort: 8080
+    - name: postgres
+    port: 5432    
+    targetPort: 5432

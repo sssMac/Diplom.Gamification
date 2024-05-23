@@ -1,5 +1,4 @@
 ﻿using Diplom.Gamification.Application.Interfaces;
-using Diplom.Gamification.Domain;
 using Diplom.Gamification.Domain.Common;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;

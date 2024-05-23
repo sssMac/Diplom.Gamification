@@ -1,0 +1,26 @@
+version: '3.4'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Diplom.Gamification.Web/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Docker"
+      ConnectionStrings__DefaultConnection: "Host=postgre;Port=5432;Database=DiplomDB;Username=postgres;Password=russiamedved"
+    ports:
+      - '5244:8080'
+    depends_on:
+      - postgre
+
+  postgre:
+    image: postgres:14.1-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "russiamedved"
+      POSTGRES_DB: "DiplomDB"
+    ports:
+      - '7007:5432'
+    volumes:
+      - /postgresql-data:/var/lib/postgresql/data

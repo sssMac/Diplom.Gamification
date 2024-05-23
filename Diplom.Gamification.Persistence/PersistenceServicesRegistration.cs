@@ -1,15 +1,13 @@
 ﻿using Diplom.Gamification.Application.Interfaces;
-using Diplom.Gamification.Domain;
 using Diplom.Gamification.Persistence.Repositories;
+using Diplom.Gamification.Shared;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 namespace Diplom.Gamification.Persistence
 {
@@ -18,10 +16,10 @@ namespace Diplom.Gamification.Persistence
         public static IServiceCollection AddPersistenceLayer(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<ApplicationContext>(options =>
-               options.UseNpgsql(configuration.GetConnectionString("ReviewsDbConnectionString")));
+               options.UseNpgsql(configuration.GetConnectionString("DBConnectionString")));
 
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-            //services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddIdentity<ApplicationUser, IdentityRole>(
                options =>
@@ -48,5 +46,6 @@ namespace Diplom.Gamification.Persistence
 
             return services;
         }
+
     }
 }

@@ -1,0 +1,105 @@
+﻿@model AssignmentViewModel
+
+﻿@{
+	ViewData["Title"] = "Задача";
+}
+
+<div>
+	<div class="wrapper">
+		<textarea id="code_editor">
+public class Program
+{
+	private static void Main(string[] args)
+	{
+		Console.WriteLine("Hello, world!");
+	}
+}
+		</textarea>
+		<div class="info_wrapper">
+			<div class="instructions">
+				<div class="topic">@Model.Title</div>
+				<div class="task_description">@(Html.Raw(@Model.Description))</div>
+				<div class="heading">Вход</div>
+				<div class="task_inputs">
+					@Model.AssignmentTest.Input
+				</div>
+				<div class="heading">Выход</div>
+				<div class="task_outputs">
+					@Model.AssignmentTest.Output
+				</div>
+				<ul class="notes">
+					<li>Должно выполняться менее чем за 3 секунды.</li>
+				</ul>
+			</div>
+
+			<div class="compile_wrapper">
+				<button onclick="Compile('@ViewBag.Tests', '@ViewBag.Assignmentid')" class="compile_button">Запустить <i class="fa-solid fa-play"></i></button>
+				<button onclick="TestTime('@ViewBag.Tests')" class="compile_button">test test test <i class="fa-solid fa-play"></i></button>
+				<div class="compilation_stage" data-stage="build" data-status="default">
+					<div class="title">
+						<div class="success icon">
+							<i class="fa-regular fa-circle-check"></i>
+						</div>
+						<div class="fail icon">
+							<i class="fa-regular fa-circle-xmark"></i>
+						</div>
+						<div class="wait icon">
+							<i class="fa-solid fa-spinner"></i>
+						</div>
+						<div class="default icon">
+							<i class="fa-regular fa-circle-pause"></i>
+						</div>
+						<div class="topic">Сборка</div>
+					</div>
+					<div class="result" data-stage="build">
+					</div>
+				</div>
+
+				<div class="compilation_stage" data-stage="run" data-status="default">
+					<div class="title">
+						<div class="success icon">
+							<i class="fa-regular fa-circle-check"></i>
+						</div>
+						<div class="fail icon">
+							<i class="fa-regular fa-circle-xmark"></i>
+						</div>
+						<div class="wait icon">
+							<i class="fa-solid fa-spinner"></i>
+						</div>
+						<div class="default icon">
+							<i class="fa-regular fa-circle-pause"></i>
+						</div>
+						<div class="topic">Запуск</div>
+					</div>
+					<div class="result" data-stage="run">
+					</div>
+				</div>
+
+				<div class="compilation_stage" data-stage="tests" data-status="default">
+					<div class="title">
+						<div class="success icon">
+							<i class="fa-regular fa-circle-check"></i>
+						</div>
+						<div class="fail icon">
+							<i class="fa-regular fa-circle-xmark"></i>
+						</div>
+						<div class="wait icon">
+							<i class="fa-solid fa-spinner"></i>
+						</div>
+						<div class="default icon">
+							<i class="fa-regular fa-circle-pause"></i>
+						</div>
+						<div class="topic">Тесты</div>
+					</div>
+					<div class="result" data-stage="tests">
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+@section Scripts {
+	<script src="~/js/compiler.js"></script>
+}

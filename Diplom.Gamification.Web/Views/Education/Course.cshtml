@@ -1,0 +1,71 @@
+﻿@model CourseViewModel
+
+@{
+    Layout = "../Shared/_Layout";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="media g-mb-30 media-comment">
+
+                @if (Model.CreatorUserName == User.Identity.Name)
+                {
+                    <div class="action-panel">
+                        <a asp-action="NewLesson" asp-controller="Creator" asp-route-id="@Model.Id" class="btn btn-primary" style="background-color:black !important; margin-bottom: 25px;">Добавить урок</a>
+                    </div>
+                }
+
+                <div class="form-group review-secondary-data">
+                    <img class="d-flex g-width-50 g-height-50 rounded-circle g-mt-3 g-mr-15" src="@Model.AvatarLink" alt="Image Description">
+                    <div class="form-group ">
+                        <h5 class="h5 g-color-gray-dark-v1 mb-0">@Model.CreatorUserName</h5>
+
+                        <div class="g-mb-15">
+                            <span class="g-color-gray-dark-v4 g-font-size-12">
+                                @Model.CreatedAt.ToString("dd.MM.yyyy")
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="comment-text">
+                    <div class="secondary">@Html.LabelFor(model => model.Title):</div>
+                    <div class="primary">@Model.Title</div>
+                </p>
+                <p class="comment-text">
+                    <div class="secondary">@Html.LabelFor(model => model.Level):</div>
+                    <div class="rating">
+                        @for (int i = 3; i > 0; i--)
+                        {
+                            if (i > Model.Level)
+                            {
+                                <i class="far fa-heart"></i>
+                            }
+                            else
+                            {
+                                <i class="fas fa-heart gold"></i>
+                            }
+                        }
+                    </div>
+                </p>
+                <p class="comment-text">
+                    <div class="secondary">@Html.LabelFor(model => model.Description):</div>
+                    <div class="primary">@(Html.Raw(Model.Description))</div>
+                </p>
+
+                <div class="row">
+                    @foreach (var item in Model.Lessons)
+                    {
+                        <div class="card" style="width: 18rem; margin: 10px;">
+                            <div class="card-body">
+                                <h5 class="card-title">@item.Title</h5>
+                                <a href="@Url.Action("Lesson", "Education", new { id = item.Id })" class="btn btn-primary">Пройти</a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
