@@ -19,7 +19,9 @@ namespace Diplom.Gamification.Application.ViewModels
         public bool BuildSucceed { get; set; }
         public string ElapsedTime { get; set; } = string.Empty;
         public string Result { get; set; } = string.Empty;
-    }
+        public string CodeSkill { get; set; } = string.Empty;
+
+	}
 
     public class TestResultModel
     {

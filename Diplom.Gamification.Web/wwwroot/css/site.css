@@ -235,3 +235,11 @@ td {
     margin-left: 50px;
     margin-right: 50px;
 }
+
+.result p {
+    color: darkorchid !important;
+}
+
+.result{
+    color: white;
+}

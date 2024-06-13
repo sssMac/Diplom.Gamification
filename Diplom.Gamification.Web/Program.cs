@@ -18,7 +18,6 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.MigrateDatabase();
 app.UseStaticFiles();
 
 app.UseRouting();

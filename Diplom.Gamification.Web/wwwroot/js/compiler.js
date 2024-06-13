@@ -32,6 +32,7 @@ $(document).ready(() => {
 });
 
 function ClearResult() {
+    document.querySelector(`.result[data-codeskill='skill']`).innerHTML = "";
     document.querySelector(`.result[data-stage='build']`).innerHTML = "";
     document.querySelector(`.result[data-stage='run']`).innerHTML = "";
     document.querySelector(`.result[data-stage='tests']`).innerHTML = "";
@@ -41,6 +42,12 @@ function SetResult(stage, message, elapsed) {
         `<div class="message">${message}</div>
                                         <div class="elapsed">Прошло времени: ${elapsed}</div>`;
 }
+function SetSkillResult(stage, message) {
+    document.querySelector(`.result[data-codeskill='${stage}']`).innerHTML =
+        `${message}`;
+}
+var codeSkill = document.querySelector(".compilation_stage[data-codeskill='skill']");
+
 var buildStage = document.querySelector(".compilation_stage[data-stage='build']");
 var runStage = document.querySelector(".compilation_stage[data-stage='run']");
 var testsStage = document.querySelector(".compilation_stage[data-stage='tests']");
@@ -75,6 +82,7 @@ async function Compile(tests, assignmentid) {
         SetResult("build", `${errors}`, build_result.elapsedTime);
         return;
     } else {
+        SetSkillResult("skill","Уровень написания кода:" + build_result.codeSkill)
         SetResult("build", ``, build_result.elapsedTime);
     }
     buildStage.setAttribute("data-status", "success");

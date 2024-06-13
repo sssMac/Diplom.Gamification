@@ -1,6 +1,7 @@
 ﻿using Diplom.Gamification.Application.Interfaces;
 using Diplom.Gamification.Application.ViewModels;
 using Diplom.Gamification.Shared;
+using Markdig;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -19,20 +20,23 @@ namespace Diplom.Gamification.Web.Controllers
         private readonly IEducationService _educationService;
         private readonly IAssignmentResultService _assignmentResultService;
 		private readonly UserManager<ApplicationUser> _userManager;
-		public AssignmentController(
-			ILogger<AssignmentController> logger,
-			IEducationService educationService,
-			IAssignmentResultService assignmentResultService,
-			UserManager<ApplicationUser> userManager)
-		{
-			_logger = logger ?? throw new ArgumentNullException(nameof(logger));
-			_educationService = educationService ?? throw new ArgumentNullException(nameof(educationService));
-			Tests = new();
-			_assignmentResultService = assignmentResultService ?? throw new ArgumentNullException(nameof(assignmentResultService));
-			_userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
-		}
+        private readonly IYandexService _yandexService;
+        public AssignmentController(
+            ILogger<AssignmentController> logger,
+            IEducationService educationService,
+            IAssignmentResultService assignmentResultService,
+            UserManager<ApplicationUser> userManager,
+            IYandexService yandexService)
+        {
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _educationService = educationService ?? throw new ArgumentNullException(nameof(educationService));
+            Tests = new();
+            _assignmentResultService = assignmentResultService ?? throw new ArgumentNullException(nameof(assignmentResultService));
+            _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
+            _yandexService = yandexService ?? throw new ArgumentNullException(nameof(yandexService));
+        }
 
-		async Task<string> Build()
+        async Task<string> Build()
         {
             return await Compile("dotnet.exe", @"build ..\Diplom.Gamification.CompilerApp\Diplom.Gamification.CompilerApp.csproj");
         }
@@ -203,6 +207,10 @@ namespace Diplom.Gamification.Web.Controllers
             {
                 result.ElapsedTime = buildResult.Split("Прошло времени")[1].Trim();
                 result.BuildSucceed = true;
+                var res = await _yandexService.GetCodeSkillAsync(code);
+
+                var pipeline = new MarkdownPipelineBuilder().Build();
+                result.CodeSkill = Markdown.ToHtml(res.Result.Alternatives[0].Message.Text, pipeline);
             }
 
             return result;

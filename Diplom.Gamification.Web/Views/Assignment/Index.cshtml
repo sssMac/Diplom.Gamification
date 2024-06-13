@@ -31,10 +31,11 @@ public class Program
 					<li>Должно выполняться менее чем за 3 секунды.</li>
 				</ul>
 			</div>
-
+			<div class="result" data-codeskill="skill" style="margin-left: 10px;">
+				
+			</div>
 			<div class="compile_wrapper">
 				<button onclick="Compile('@ViewBag.Tests', '@ViewBag.Assignmentid')" class="compile_button">Запустить <i class="fa-solid fa-play"></i></button>
-				<button onclick="TestTime('@ViewBag.Tests')" class="compile_button">test test test <i class="fa-solid fa-play"></i></button>
 				<div class="compilation_stage" data-stage="build" data-status="default">
 					<div class="title">
 						<div class="success icon">
